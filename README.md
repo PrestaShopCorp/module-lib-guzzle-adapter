@@ -11,7 +11,16 @@ composer require prestashop/module-lib-guzzle-adapter
 
 ## Usage
 
-*To do*
+```php
+# Getting a client (Psr\Http\Client\ClientInterface)
+$options = ['base_url' => 'http://some-url/'];
+$client = (new Prestashop\ModuleLibGuzzleAdapter\ClientFactory())->getClient($options);
+
+# Sending requests and receive response (Psr\Http\Message\ResponseInterface)
+$response = $this->client->sendRequest(
+    new GuzzleHttp\Psr7\Request('POST', $this->parameters->getFaqUri())
+);
+```
 
 ## Why this library?
 
@@ -29,4 +38,4 @@ It is not possible for a module contributor to require its own Guzzle dependency
 
 This library reuses the idea behind [PHP-HTTP](https://docs.php-http.org), where the implementation of HTTP requests should be the same (PSR) whatever the client chosen.
 
-The client files from [php-http/guzzle5-adapter](https://github.com/php-http/guzzle5-adapter) and [php-http/guzzle7-adapter](https://github.com/php-http/guzzle7-adapter) has been copied in this repository because these libraries both require a different version Guzzle in their dependencies in order to work. Requiring them together would conflict, so we duplicated the client adapter to be safe.
+The client files from [php-http/guzzle5-adapter](https://github.com/php-http/guzzle5-adapter) and [php-http/guzzle7-adapter](https://github.com/php-http/guzzle7-adapter) have been copied in this repository because these libraries both require a different version Guzzle in their dependencies to work. Requiring them together would conflict, so we duplicated the client adapters to be safe.
