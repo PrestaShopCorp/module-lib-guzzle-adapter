@@ -29,6 +29,8 @@ The automatically changed properties are:
 | Guzzle 5 property | | Guzzle 7 property |
 | ------------- | -- | ------------- |
 | base_url  | <=> | base_url  |
+| defaults.authorization | <=> | authorization  |
+| defaults.exceptions | <=> | http_errors  |
 | defaults.timeout | <=> | timeout  |
 
 ## Why this library?
