@@ -17,7 +17,7 @@ use Psr\Http\Message\ResponseInterface;
  * HTTP Adapter for Guzzle 7.
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
- * 
+ *
  * @see https://github.com/php-http/guzzle7-adapter/blob/master/src/Client.php
  */
 class Client implements ClientClientInterface
@@ -38,7 +38,7 @@ class Client implements ClientClientInterface
 
     /**
      * Factory method to create the Guzzle 7 adapter with custom Guzzle configuration.
-     * 
+     *
      * @param array<string, mixed> $config
      */
     public static function createWithConfig(array $config): Client

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Prestashop\ModuleLibGuzzleAdapter;
@@ -8,7 +9,8 @@ use Prestashop\ModuleLibGuzzleAdapter\Guzzle7\Client as Guzzle7Client;
 use PrestaShop\ModuleLibGuzzleAdapter\VersionDetection;
 use Psr\Http\Client\ClientInterface;
 
-class ClientFactory {
+class ClientFactory
+{
     /**
      * @var VersionDetection
      */

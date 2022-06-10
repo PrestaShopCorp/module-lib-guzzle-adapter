@@ -6,9 +6,9 @@ namespace Prestashop\ModuleLibGuzzleAdapter\Guzzle7;
 
 use GuzzleHttp\Exception as GuzzleExceptions;
 use GuzzleHttp\Promise\PromiseInterface;
-use Prestashop\ModuleLibGuzzleAdapter\Guzzle7\Exception\UnexpectedValueException;
 use Http\Client\Exception as HttplugException;
 use Http\Promise\Promise as HttpPromise;
+use Prestashop\ModuleLibGuzzleAdapter\Guzzle7\Exception\UnexpectedValueException;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 

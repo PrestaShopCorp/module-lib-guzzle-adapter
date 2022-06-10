@@ -5,20 +5,20 @@ namespace Prestashop\ModuleLibGuzzleAdapter\Guzzle5;
 use Exception;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception as GuzzleExceptions;
 use GuzzleHttp\Message\RequestInterface as GuzzleRequest;
 use GuzzleHttp\Message\ResponseInterface as GuzzleResponse;
+use GuzzleHttp\Psr7\HttpFactory;
+use Http\Client\Exception as HttplugException;
 use Http\Message\ResponseFactory;
+use Psr\Http\Client\ClientInterface as ClientClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Http\Client\Exception as HttplugException;
-use GuzzleHttp\Exception as GuzzleExceptions;
-use GuzzleHttp\Psr7\HttpFactory;
-use Psr\Http\Client\ClientInterface as ClientClientInterface;
 
 /**
  * @author GeLo <geloen.eric@gmail.com>
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
- * 
+ *
  * @see https://github.com/php-http/guzzle5-adapter/blob/master/src/Client.php
  */
 class Client implements ClientClientInterface
@@ -46,7 +46,7 @@ class Client implements ClientClientInterface
     /**
      * Factory method to create the Guzzle 5 adapter with custom Guzzle configuration.
      * Added after duplication of adapter.
-     * 
+     *
      * @param array<string, mixed> $config
      */
     public static function createWithConfig(array $config): Client
@@ -120,7 +120,7 @@ class Client implements ClientClientInterface
      * Converts a Guzzle exception into an Httplug exception.
      *
      * @param GuzzleExceptions\TransferException $exception
-     * @param RequestInterface                   $request
+     * @param RequestInterface $request
      *
      * @return Exception
      */
