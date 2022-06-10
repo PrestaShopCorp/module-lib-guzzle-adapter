@@ -18,7 +18,7 @@ $client = (new Prestashop\ModuleLibGuzzleAdapter\ClientFactory())->getClient($op
 
 # Sending requests and receive response (Psr\Http\Message\ResponseInterface)
 $response = $this->client->sendRequest(
-    new GuzzleHttp\Psr7\Request('POST', $this->parameters->getFaqUri())
+    new GuzzleHttp\Psr7\Request('POST', 'some-uri')
 );
 ```
 
