@@ -44,6 +44,17 @@ class Client implements ClientClientInterface
     }
 
     /**
+     * Factory method to create the Guzzle 5 adapter with custom Guzzle configuration.
+     * Added after duplication of adapter.
+     * 
+     * @param array<string, mixed> $config
+     */
+    public static function createWithConfig(array $config): Client
+    {
+        return new self(new GuzzleClient($config));
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function sendRequest(RequestInterface $request): ResponseInterface

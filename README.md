@@ -1,1 +1,32 @@
-We had to copy client files from php-http/guzzle5-adapter and php-http/guzzle7-adapter. They require different version of Guzzle in order to work, so they cannot be required together on this project. Also, we only needed the interfaces.
+# PrestaShop module library for Guzzle clients
+
+Plug modules to the Guzzle client available on a running shop.
+This library is compatible with PHP 7.2 and above.
+
+## Installation
+
+```
+composer require prestashop/module-lib-guzzle-adapter
+```
+
+## Usage
+
+*To do*
+
+## Why this library?
+
+Making HTTP requests in a PrestaShop module can be done in several ways. With `file_get_contents()`, cURL or Guzzle when provided by the core.
+
+Depending on the running version of PrestaShop, the bundled version of Guzzle can be different:
+* PrestaShop 1.7: Guzzle 5
+* PrestaShop 8: Guzzle 7
+
+Having a module compatible for these two major PrestaShop versions can be tricky. The classes provided by the two Guzzle version are named the same, but their methods are different.
+
+It is not possible for a module contributor to require its own Guzzle dependency either, because PHP cannot load different versions of a same class and he would never know which one would be loaded first.
+
+## Implementation notes
+
+This library reuses the idea behind [PHP-HTTP](https://docs.php-http.org), where the implementation of HTTP requests should be the same (PSR) whatever the client chosen.
+
+The client files from [php-http/guzzle5-adapter](https://github.com/php-http/guzzle5-adapter) and [php-http/guzzle7-adapter](https://github.com/php-http/guzzle7-adapter) has been copied in this repository because these libraries both require a different version Guzzle in their dependencies in order to work. Requiring them together would conflict, so we duplicated the client adapter to be safe.

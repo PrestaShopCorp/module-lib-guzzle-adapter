@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Prestashop\ModuleLibGuzzleAdapter;
 
@@ -15,7 +16,7 @@ class ClientFactory {
 
     public function __construct(VersionDetection $versionDetection = null)
     {
-        $this->versionDetection = $versionDetection;
+        $this->versionDetection = $versionDetection ?: new VersionDetection();
     }
 
     /**
