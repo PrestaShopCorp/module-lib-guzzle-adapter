@@ -65,4 +65,38 @@ class Guzzle7ConfigTest extends TestCase
             'timeout' => 10,
         ], $actualConfig);
     }
+
+    public function testExceptions()
+    {
+        $originalConfig = [
+            'defaults' => [
+                'exceptions' => true,
+            ],
+        ];
+
+        $actualConfig = Config::fixConfig($originalConfig);
+
+        $this->assertEquals([
+            'http_errors' => true,
+        ], $actualConfig);
+    }
+
+    public function testAuthorization()
+    {
+        $originalConfig = [
+            'defaults' => [
+                'headers' => [
+                    'Authorization' => 'Bearer someMegaToken',
+                ],
+            ],
+        ];
+
+        $actualConfig = Config::fixConfig($originalConfig);
+
+        $this->assertEquals([
+            'headers' => [
+                'Authorization' => 'Bearer someMegaToken',
+            ],
+        ], $actualConfig);
+    }
 }

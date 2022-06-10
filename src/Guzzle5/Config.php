@@ -18,6 +18,16 @@ class Config implements ConfigInterface
             unset($config['timeout']);
         }
 
+        if (isset($config['headers'])) {
+            $config['defaults']['headers'] = $config['headers'];
+            unset($config['headers']);
+        }
+
+        if (isset($config['http_errors'])) {
+            $config['defaults']['exceptions'] = $config['http_errors'];
+            unset($config['http_errors']);
+        }
+
         if (isset($config['base_uri'])) {
             $config['base_url'] = $config['base_uri'];
 
