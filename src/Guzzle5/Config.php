@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Prestashop\ModuleLibGuzzleAdapter\Guzzle5;
 
-class Config
+use Prestashop\ModuleLibGuzzleAdapter\ConfigInterface;
+
+class Config implements ConfigInterface
 {
     /**
-     * When a client is created with the config of another version,
-     * this method makes sure the keys match.
+     * {@inheritdoc}
      */
     public static function fixConfig(array $config): array
     {
@@ -22,6 +23,7 @@ class Config
 
             unset($config['base_uri']);
         }
+
         return $config;
     }
 }

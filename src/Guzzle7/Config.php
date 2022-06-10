@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace Prestashop\ModuleLibGuzzleAdapter\Guzzle7;
 
-class Config
+use Prestashop\ModuleLibGuzzleAdapter\ConfigInterface;
+
+class Config implements ConfigInterface
 {
     /**
-     * When a client is created with the config of another version,
-     * this method makes sure the keys match.
+     * {@inheritdoc}
      */
     public static function fixConfig(array $config): array
     {
         if (isset($config['defaults'])) {
             if (isset($config['defaults']['timeout'])) {
                 $config['timeout'] = $config['defaults']['timeout'];
-                $config['defaults']['timeout'];
             }
 
             unset($config['defaults']);
@@ -26,6 +26,7 @@ class Config
 
             unset($config['base_url']);
         }
+
         return $config;
     }
 }
