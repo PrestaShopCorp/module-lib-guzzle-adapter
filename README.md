@@ -22,6 +22,15 @@ $response = $this->client->sendRequest(
 );
 ```
 
+In this example, `base_url` is known to be a option for Guzzle 5 that has been replaced for `base_uri` on Guzzle 6+. Any of this two keys can be set, as it will be automatically modified for the other client if needed.
+
+The automatically changed properties are:
+
+| Guzzle 5 property | | Guzzle 7 property |
+| ------------- | -- | ------------- |
+| base_url  | <=> | base_url  |
+| defaults.timeout | <=> | timeout  |
+
 ## Why this library?
 
 Making HTTP requests in a PrestaShop module can be done in several ways. With `file_get_contents()`, cURL or Guzzle when provided by the core.

@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.0.0
+        uses: actions/checkout@v2
 
       - name: PHP syntax checker 7.2
         uses: prestashop/github-action-php-lint/7.2@master
@@ -22,17 +22,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.0.0
+        uses: actions/checkout@v2
+
+      - name: Cache vendor folder
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+
+      - name: Cache composer folder
+        uses: actions/cache@v2
+        with:
+          path: ~/.composer/cache
+          key: php-composer-cache
+
+      - run: composer install
 
       - name: Run PHP-CS-Fixer
-        uses: prestashopcorp/github-action-php-cs-fixer@master
+        run: vendor/bin/php-cs-fixer fix --config .php_cs.dist.php --diff --dry-run
 
   phpstan:
     name: PHPStan
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.0.0
+        uses: actions/checkout@v2
 
       - name: Cache vendor folder
         uses: actions/cache@v2
@@ -49,23 +63,23 @@ jobs:
       - run: composer install
 
       - run: composer install
-        working-directory: test/Guzzle5
+        working-directory: tests/Guzzle5
 
       - run: composer install
-        working-directory: test/Guzzle7
+        working-directory: tests/Guzzle7
 
       - name : Run PHPStan for Guzzle 5
-        run: vendor/bin/phpstan analyse -c test/Guzzle5/phpstan.neon
+        run: vendor/bin/phpstan analyse -c tests/Guzzle5/phpstan.neon
 
       - name : Run PHPStan for Guzzle 7
-        run: vendor/bin/phpstan analyse -c test/Guzzle7/phpstan.neon
+        run: vendor/bin/phpstan analyse -c tests/Guzzle7/phpstan.neon
 
   phpunit:
     name: PHPUnit
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.0.0
+        uses: actions/checkout@v2
 
       - name: Cache vendor folder
         uses: actions/cache@v2
@@ -82,4 +96,4 @@ jobs:
       - run: composer install
 
       - name: Run PHPUnit
-        run: vendor/bin/phpunit tests
+        run: vendor/bin/phpunit tests/unit
