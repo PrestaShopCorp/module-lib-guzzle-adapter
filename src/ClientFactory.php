@@ -6,7 +6,6 @@ namespace Prestashop\ModuleLibGuzzleAdapter;
 
 use Prestashop\ModuleLibGuzzleAdapter\Guzzle5\Client as Guzzle5Client;
 use Prestashop\ModuleLibGuzzleAdapter\Guzzle7\Client as Guzzle7Client;
-use PrestaShop\ModuleLibGuzzleAdapter\VersionDetection;
 use Psr\Http\Client\ClientInterface;
 
 class ClientFactory
