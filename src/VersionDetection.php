@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PrestaShop\ModuleLibGuzzleAdapter;
+namespace Prestashop\ModuleLibGuzzleAdapter;
 
 class VersionDetection
 {

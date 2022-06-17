@@ -15,6 +15,11 @@ class ClientFactory
      */
     private $versionDetection;
 
+    /**
+     * @var ?ClientInterface
+     */
+    private $client;
+
     public function __construct(VersionDetection $versionDetection = null)
     {
         $this->versionDetection = $versionDetection ?: new VersionDetection();
@@ -25,10 +30,27 @@ class ClientFactory
      */
     public function getClient(array $config = []): ClientInterface
     {
+        if (!$this->client) {
+            $this->client = $this->initClient($config);
+        }
+
+        return $this->client;
+    }
+
+    /**
+     * @param array<string, mixed> $config
+     */
+    private function initClient(array $config = []): ClientInterface
+    {
         if ($this->versionDetection->getGuzzleMajorVersionNumber() >= 7) {
             return Guzzle7Client::createWithConfig($config);
         }
 
         return Guzzle5Client::createWithConfig($config);
+    }
+
+    public function setClient(ClientInterface $client): void
+    {
+        $this->client = $client;
     }
 }
