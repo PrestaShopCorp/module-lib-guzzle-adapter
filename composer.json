@@ -29,5 +29,13 @@
         "phpstan/phpstan": "^1.7",
         "phpunit/phpunit": "^9.5",
         "prestashop/php-dev-tools": "^4.2"
+    },
+    "scripts": {
+        "phpstan-g5": "vendor/bin/phpstan analyze -c tests/Guzzle5/phpstan.neon",
+        "phpstan-g7": "vendor/bin/phpstan analyze -c tests/Guzzle7/phpstan.neon",
+        "phpstan": [
+            "@phpstan-g5",
+            "@phpstan-g7"
+        ]
     }
 }
