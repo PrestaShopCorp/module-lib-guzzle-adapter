@@ -8,9 +8,8 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception as GuzzleExceptions;
 use GuzzleHttp\Message\RequestInterface as GuzzleRequest;
 use GuzzleHttp\Message\ResponseInterface as GuzzleResponse;
-use GuzzleHttp\Psr7\HttpFactory;
+use GuzzleHttp\Psr7\Response;
 use Http\Client\Exception as HttplugException;
-use Http\Message\ResponseFactory;
 use Psr\Http\Client\ClientInterface as ClientClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -29,18 +28,11 @@ class Client implements ClientClientInterface
     private $client;
 
     /**
-     * @var ResponseFactory
-     */
-    private $responseFactory;
-
-    /**
      * @param ClientInterface|null $client
-     * @param ResponseFactory $responseFactory
      */
-    public function __construct(ClientInterface $client = null, ResponseFactory $responseFactory = null)
+    public function __construct(ClientInterface $client = null)
     {
         $this->client = $client ?: new GuzzleClient();
-        $this->responseFactory = $responseFactory ?: new HttpFactory();
     }
 
     /**
@@ -107,9 +99,8 @@ class Client implements ClientClientInterface
     {
         $body = $response->getBody();
 
-        return $this->responseFactory->createResponse(
+        return new Response(
             $response->getStatusCode(),
-            null,
             $response->getHeaders(),
             isset($body) ? $body->detach() : null,
             $response->getProtocolVersion()
